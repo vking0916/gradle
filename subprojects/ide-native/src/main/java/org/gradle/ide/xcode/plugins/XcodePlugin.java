@@ -97,7 +97,7 @@ public class XcodePlugin extends IdePlugin {
         xcode = (DefaultXcodeExtension) project.getExtensions().create(XcodeExtension.class, "xcode", DefaultXcodeExtension.class, objectFactory);
         xcode.getProject().setLocationDir(project.file(project.getName() + ".xcodeproj"));
 
-        if (isRoot(project)) {
+        if (isRoot()) {
             GenerateXcodeWorkspaceFileTask workspaceTask = createWorkspaceTask(project);
             addIncludedBuildToWorkspace(project, workspaceTask);
             lifecycleTask.dependsOn(workspaceTask);
@@ -128,7 +128,7 @@ public class XcodePlugin extends IdePlugin {
         getCleanTask().setDescription("Cleans XCode project files (xcodeproj)");
         Delete cleanTask = project.getTasks().create("cleanXcodeProject", Delete.class);
         cleanTask.delete(xcode.getProject().getLocationDir());
-        if (isRoot(project)) {
+        if (isRoot()) {
             cleanTask.delete(toXcodeWorkspacePackageDir(project));
         }
         getCleanTask().dependsOn(cleanTask);
@@ -163,7 +163,7 @@ public class XcodePlugin extends IdePlugin {
 
     private String getBridgeTaskPath(Project project) {
         String projectPath = "";
-        if (!isRoot(project)) {
+        if (!isRoot()) {
             projectPath = project.getPath();
         }
         return projectPath + ":_xcode__${ACTION}_${PRODUCT_NAME}_${CONFIGURATION}";
@@ -324,10 +324,6 @@ public class XcodePlugin extends IdePlugin {
         } else {
             return "compiled";
         }
-    }
-
-    private static boolean isRoot(Project project) {
-        return project.getParent() == null;
     }
 
     private static PublishArtifact createXcodeArtifact(Project project) {

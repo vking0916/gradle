@@ -133,4 +133,8 @@ public abstract class IdePlugin implements Plugin<Project> {
 
         return artifactMetadata;
     }
+
+    public boolean isRoot() {
+        return project.getParent() == null;
+    }
 }

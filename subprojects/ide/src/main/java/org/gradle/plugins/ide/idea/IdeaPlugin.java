@@ -148,7 +148,7 @@ public class IdeaPlugin extends IdePlugin {
     }
 
     private void configureIdeaWorkspace(final Project project) {
-        if (isRoot(project)) {
+        if (isRoot()) {
             GenerateIdeaWorkspace task = project.getTasks().create("ideaWorkspace", GenerateIdeaWorkspace.class);
             task.setDescription("Generates an IDEA workspace file (IWS)");
             IdeaWorkspace workspace = new IdeaWorkspace();
@@ -161,7 +161,7 @@ public class IdeaPlugin extends IdePlugin {
     }
 
     private void configureIdeaProject(final Project project) {
-        if (isRoot(project)) {
+        if (isRoot()) {
             final GenerateIdeaProject task = project.getTasks().create("ideaProject", GenerateIdeaProject.class);
             task.setDescription("Generates IDEA project file (IPR)");
             XmlFileContentMerger ipr = new XmlFileContentMerger(task.getXmlTransformer());
@@ -456,7 +456,7 @@ public class IdeaPlugin extends IdePlugin {
             }
 
         });
-        if (isRoot(project)) {
+        if (isRoot()) {
             new IdeaScalaConfigurer(project).configure();
         }
     }
@@ -467,7 +467,7 @@ public class IdeaPlugin extends IdePlugin {
     }
 
     private void linkCompositeBuildDependencies(final ProjectInternal project) {
-        if (isRoot(project)) {
+        if (isRoot()) {
             getLifecycleTask().dependsOn(new Callable<List<TaskDependency>>() {
                 @Override
                 public List<TaskDependency> call() throws Exception {
@@ -495,10 +495,6 @@ public class IdeaPlugin extends IdePlugin {
             }
         }
         return dependencies;
-    }
-
-    private static boolean isRoot(Project project) {
-        return project.getParent() == null;
     }
 
     private static class ImlArtifact extends DefaultPublishArtifact {
