@@ -248,7 +248,7 @@ abstract class AbstractMavenModule extends AbstractModule implements MavenModule
     /**
      * Asserts that exactly the given artifacts have been deployed, along with their checksum files
      */
-    void assertArtifactsPublished(String... names) {
+    void assertArtifactsPublished(def names) {
         Set allFileNames = []
         for (name in names) {
             allFileNames.addAll([name, "${name}.sha1", "${name}.md5"])

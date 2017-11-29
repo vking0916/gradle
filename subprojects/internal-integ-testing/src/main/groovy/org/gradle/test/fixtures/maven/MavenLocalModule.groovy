@@ -64,7 +64,7 @@ class MavenLocalModule extends MavenFileModule {
 
     /* No checksums published for local modules */
     @Override
-    void assertArtifactsPublished(String... names) {
+    void assertArtifactsPublished(def names) {
         assert moduleDir.list() as Set == names as Set
     }
 }
