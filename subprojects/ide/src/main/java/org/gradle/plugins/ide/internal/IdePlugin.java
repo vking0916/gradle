@@ -117,7 +117,7 @@ public abstract class IdePlugin implements Plugin<Project> {
         projectComponentProvider.registerAdditionalArtifact(projectId, new PublishArtifactLocalArtifactMetadata(projectId, ideArtifact));
     }
 
-    protected List<LocalComponentArtifactMetadata> getIdeArtifactMetadata(String type) {
+    public List<LocalComponentArtifactMetadata> getIdeArtifactMetadata(String type) {
         ServiceRegistry serviceRegistry = ((ProjectInternal)project).getServices();
         List<LocalComponentArtifactMetadata> artifactMetadata = Lists.newArrayList();
         ProjectPathRegistry projectPathRegistry = serviceRegistry.get(ProjectPathRegistry.class);
