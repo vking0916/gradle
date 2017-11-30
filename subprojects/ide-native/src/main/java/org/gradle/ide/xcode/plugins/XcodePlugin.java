@@ -99,7 +99,7 @@ public class XcodePlugin extends IdePlugin {
 
         if (isRoot()) {
             GenerateXcodeWorkspaceFileTask workspaceTask = createWorkspaceTask(project);
-            addIncludedBuildToWorkspace(project, workspaceTask);
+            configureWorkspace(project, workspaceTask);
             lifecycleTask.dependsOn(workspaceTask);
         }
 
@@ -332,7 +332,7 @@ public class XcodePlugin extends IdePlugin {
         return new XcodeProjectArtifact(xcodeProject, byName);
     }
 
-    private void addIncludedBuildToWorkspace(final Project project, GenerateXcodeWorkspaceFileTask workspaceTask) {
+    private void configureWorkspace(final Project project, GenerateXcodeWorkspaceFileTask workspaceTask) {
         workspaceTask.dependsOn(new Callable<List<TaskDependency>>() {
             @Override
             public List<TaskDependency> call() throws Exception {
