@@ -52,7 +52,7 @@ public class JavaToolChainServiceRegistry extends AbstractPluginServiceRegistry 
 
     private static class ProjectScopeCompileServices {
         JavaCompilerFactory createJavaCompilerFactory(GradleInternal gradle, WorkerDaemonFactory workerDaemonFactory, Factory<JavaCompiler> javaHomeBasedJavaCompilerFactory, FileResolver fileResolver, WorkerDirectoryProvider workerDirectoryProvider) {
-            return new DefaultJavaCompilerFactory(workerDirectoryProvider.getIdleWorkingDirectory(), workerDaemonFactory, javaHomeBasedJavaCompilerFactory, fileResolver);
+            return new DefaultJavaCompilerFactory(workerDirectoryProvider, workerDaemonFactory, javaHomeBasedJavaCompilerFactory, fileResolver);
         }
 
         JavaToolChainInternal createJavaToolChain(JavaCompilerFactory compilerFactory, ExecActionFactory execActionFactory) {
