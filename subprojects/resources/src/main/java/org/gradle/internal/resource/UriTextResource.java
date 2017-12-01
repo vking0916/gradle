@@ -47,13 +47,13 @@ public class UriTextResource implements TextResource {
 
     public UriTextResource(String description, File sourceFile) {
         this.description = description;
-        this.sourceFile = FileUtils.canonicalize(sourceFile);
+        this.sourceFile = FileUtils.simplify(sourceFile);
         this.sourceUri = sourceFile.toURI();
     }
 
     UriTextResource(String description, URI sourceUri) {
         this.description = description;
-        this.sourceFile = sourceUri.getScheme().equals("file") ? FileUtils.canonicalize(new File(sourceUri.getPath())) : null;
+        this.sourceFile = sourceUri.getScheme().equals("file") ? FileUtils.simplify(new File(sourceUri.getPath())) : null;
         this.sourceUri = sourceUri;
     }
 
