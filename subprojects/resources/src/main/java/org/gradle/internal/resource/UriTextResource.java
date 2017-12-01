@@ -150,7 +150,7 @@ public class UriTextResource implements TextResource {
 
     @Override
     public File getFile() {
-        return sourceFile != null && sourceFile.isFile() ? sourceFile : null;
+        return sourceFile;
     }
 
     @Override
