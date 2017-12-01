@@ -16,6 +16,7 @@
 
 package org.gradle.internal;
 
+import com.google.common.io.Files;
 import org.gradle.api.GradleException;
 import org.gradle.api.UncheckedIOException;
 
@@ -166,6 +167,13 @@ public class FileUtils {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    /**
+     * Simplifies the given file by removing segments like /../ and /./
+     */
+    public static File simplify(File src) {
+        return new File(Files.simplifyPath(src.getAbsolutePath()));
     }
 
 }
