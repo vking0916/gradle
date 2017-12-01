@@ -20,6 +20,7 @@ import org.gradle.internal.UncheckedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.AccessControlException;
 
 public class ReflectionDispatch implements Dispatch<MethodInvocation> {
     private final Object target;
@@ -33,6 +34,8 @@ public class ReflectionDispatch implements Dispatch<MethodInvocation> {
             Method method = message.getMethod();
             method.setAccessible(true);
             method.invoke(target, message.getArguments());
+        } catch (AccessControlException e) {
+            throw e;
         } catch (InvocationTargetException e) {
             throw UncheckedException.throwAsUncheckedException(e.getCause());
         } catch (Throwable throwable) {
