@@ -25,5 +25,6 @@ import org.gradle.api.Project;
 public class AnnouncePlugin implements Plugin<Project> {
     public void apply(Project project) {
         project.getExtensions().create("announce", AnnouncePluginExtension.class, project);
+        System.out.println("aaaa");
     }
 }
